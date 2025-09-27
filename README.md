@@ -1,2 +1,2 @@
 # Jannah-Coins
-Kindness as a currency - Ummah’s Safe Place
+Every act of kindness earns Jannah Coins. A currency of mercy, not greed.
