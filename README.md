@@ -39,6 +39,12 @@
       color: #1b5e20;
       margin-top: 25px;
     }
+    #message {
+      font-size: 18px;
+      color: #388e3c;
+      margin-top: 15px;
+      height: 24px; /* keeps space reserved */
+    }
   </style>
 </head>
 <body>
@@ -46,18 +52,22 @@
   <p class="subtitle">Kindness is currency</p>
   <button onclick="earnCoin()">Earn 1 Jannah Coin</button>
   <div id="coins">You have 0 coins</div>
+  <div id="message"></div>
 
   <script>
-    // Load saved coins or start at 0
     let coins = parseInt(localStorage.getItem('jannahCoins')) || 0;
     const coinsDiv = document.getElementById('coins');
+    const msgDiv = document.getElementById('message');
     coinsDiv.textContent = "You have " + coins + " coins";
 
-    // Function to earn a coin
     function earnCoin() {
       coins++;
       localStorage.setItem('jannahCoins', coins);
       coinsDiv.textContent = "You have " + coins + " coins";
+      
+      // Show temporary "good deed" message
+      msgDiv.textContent = "🌟 You did a good deed!";
+      setTimeout(() => { msgDiv.textContent = ""; }, 2000);
     }
   </script>
 </body>
