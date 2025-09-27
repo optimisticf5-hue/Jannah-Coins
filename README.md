@@ -3,71 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🌿 Jannah Coins</title>
+  <meta name="theme-color" content="#2e7d32">
+  <title>Jannah Coins – Kindness is Currency</title>
+  <link rel="manifest" href="manifest.json">
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #e8f5e9;
+      color: #2e7d32;
       text-align: center;
-      padding: 50px;
+      padding: 2rem;
     }
     h1 {
-      color: #2e7d32;
-      font-size: 2.5em;
-      margin-bottom: 10px;
-    }
-    p.subtitle {
-      color: #1b5e20;
-      font-size: 1.2em;
-      margin-bottom: 30px;
+      font-size: 2rem;
     }
     button {
-      background: #2e7d32;
-      color: white;
+      background-color: #2e7d32;
+      color: #fff;
       border: none;
-      padding: 15px 30px;
-      font-size: 18px;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: background 0.3s;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
     }
-    button:hover {
-      background: #1b5e20;
+    .coin {
+      position: absolute;
+      font-size: 24px;
+      color: #2e7d32;
+      pointer-events: none;
+      animation: flyCoin 1s ease-out forwards;
     }
-    #coins {
-      font-size: 22px;
-      color: #1b5e20;
-      margin-top: 25px;
-    }
-    #message {
-      font-size: 18px;
-      color: #388e3c;
-      margin-top: 15px;
-      height: 24px; /* keeps space reserved */
+    @keyframes flyCoin {
+      0% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-80px) scale(1.2); }
     }
   </style>
 </head>
 <body>
-  <h1>🌿 Jannah Coins</h1>
-  <p class="subtitle">Kindness is currency</p>
-  <button onclick="earnCoin()">Earn 1 Jannah Coin</button>
+  <h1>💚 Jannah Coins 💚</h1>
+  <p>Kindness is Currency. Earn coins for good deeds.</p>
   <div id="coins">You have 0 coins</div>
-  <div id="message"></div>
+  <div id="msg"></div>
+  <button onclick="earnCoin(event)">I did a kind deed</button>
 
   <script>
     let coins = parseInt(localStorage.getItem('jannahCoins')) || 0;
     const coinsDiv = document.getElementById('coins');
-    const msgDiv = document.getElementById('message');
+    const msgDiv = document.getElementById('msg');
     coinsDiv.textContent = "You have " + coins + " coins";
 
-    function earnCoin() {
+    function earnCoin(event) {
       coins++;
       localStorage.setItem('jannahCoins', coins);
       coinsDiv.textContent = "You have " + coins + " coins";
-      
-      // Show temporary "good deed" message
+
+      // Show temporary message
       msgDiv.textContent = "🌟 You did a good deed!";
       setTimeout(() => { msgDiv.textContent = ""; }, 2000);
+
+      // Create flying coin
+      const coin = document.createElement('div');
+      coin.className = 'coin';
+      coin.textContent = '💚';
+      document.body.appendChild(coin);
+
+      // Position coin above button
+      const rect = event.target.getBoundingClientRect();
+      coin.style.left = rect.left + rect.width/2 - 12 + 'px';
+      coin.style.top = rect.top - 12 + 'px';
+
+      setTimeout(() => { coin.remove(); }, 1000);
+    }
+
+    // Register service worker for offline capability
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
     }
   </script>
 </body>
