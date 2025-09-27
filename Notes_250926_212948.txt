@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jannah Coins - Ummah’s Safe Place</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0fdf4;
+      color: #064e3b;
+      text-align: center;
+      padding: 30px;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      margin: auto;
+    }
+    button {
+      background: #059669;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 18px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background: #047857;
+    }
+    .counter {
+      font-size: 22px;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- Emerald Jannah Coin Logo -->
+    <div style="margin-bottom:10px;">
+      <svg width="84" height="84" viewBox="0 0 24 24" fill="none"
+           xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="12" cy="12" r="11" fill="#0f6b3a"/>
+        <path d="M8 12a4 4 0 0 0 8 0 4 4 0 0 0-8 0z" fill="#a7f3c5"/>
+        <path d="M12 8v8M8 12h8" stroke="#074c2e" stroke-width="0.8"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h1>🌿 Jannah Coins</h1>
+    <p>Kindness is the real currency. Earn for every good deed, in shā’Allāh.</p>
+    <button onclick="earnCoin()">Earn 1 Jannah Coin</button>
+    <div class="counter" id="counter">You have 0 Jannah Coins 💚</div>
+  </div>
+
+  <script>
+    let coins = localStorage.getItem("jannahCoins") || 0;
+    document.getElementById("counter").innerText =
+      "You have " + coins + " Jannah Coins 💚";
+
+    function earnCoin() {
+      coins++;
+      localStorage.setItem("jannahCoins", coins);
+      document.getElementById("counter").innerText =
+        "You have " + coins + " Jannah Coins 💚";
+    }
+  </script>
+</body>
+</html>
